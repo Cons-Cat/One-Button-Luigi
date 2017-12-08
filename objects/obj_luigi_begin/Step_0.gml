@@ -20,7 +20,7 @@ if y > 112-vspeed-8{
 if !instance_exists(obj_narrationtext){
 	if state = -3{
 		state = -2;
-		alarm[1] = 40;
+		alarm[1] = 30;
 	}
 	if state = -1{
 		alarm[0] = time;

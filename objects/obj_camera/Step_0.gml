@@ -7,11 +7,17 @@ if canMove = true{
 	if self.x < obj_player.x - 6 + 40{
 		x = obj_player.x-6+40;
 	}
-	if obj_player.x < self.x-48{
-		//x = obj_player.x-48;
+	if self.x > obj_player.x-80{
+		if x > obj_player.x-80{
+			x -= 10;
+		} else {
+			x = obj_player.x-80;//48-6-16;
+		}
 	}
 	
-	y = obj_player.y-40;
+	if obj_player.y > self.y+40{
+		y = obj_player.y-40;
+	}
 }
 
 //Boundaries

@@ -6,6 +6,7 @@ global.pressed = 0;
 time = 15;
 state = -3;
 debug = true;
+jumpState = 0;
 
 if debug = false{
 	with instance_create_layer(0,112,layer,obj_narrationtext){

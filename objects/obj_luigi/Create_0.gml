@@ -13,7 +13,7 @@ jumpState = 0;
 qteVal = 5;
 
 if x > 520{
-	state = 10;
+	state = 17;
 	time = 1;
 } else {
 	state = 0;

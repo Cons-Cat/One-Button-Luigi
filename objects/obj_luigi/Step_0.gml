@@ -106,7 +106,7 @@ if time > 0{
 		exit;
 	}
 	if state = 14{
-		time = 40;
+		time = 28;
 		state = 15;
 		exit;
 	}
@@ -126,11 +126,48 @@ if time > 0{
 			message_end = 0;
 			message_length = string_length(message[0]);
 		}
-		state = 22;
+		state = 17;
+		time = -1;
+		exit;
+	}
+	if state = 17{
+		moveState = 1;
+		runState = 1;
+		skidState = 1;
+		state = 18;
+		time = -1;
+		moveLength = 1246-x;
+		exit;
+	}
+	if state = 18{
+		runState = 0;
+		time = -1;
+		moveLength = (1208-x+14);
+		skidState = 0;
+		state = 19;
+		exit;
+	}
+	if state = 19{
+		sprite_index = spr_p2_back;
+		time = 23;
+		state = 20;
+		exit;
+	}
+	if state = 20{
+		with instance_create_layer(x,y,layer,obj_narrationtext){
+			message[0] = "Some victims could not be restored.";
+			message[1] = "Luigi celebrates his friend, Toad.";
+			message[2] = "An engraving catches Luigi's eye."
+			message_end = 2;
+			message_length = string_length(message[0]);
+		}
+		state = 21;
 		time = -1;
 		exit;
 	}
 }
+
+
 
 if jumpState = 1{
 	vspeed = -8.5;
@@ -163,7 +200,7 @@ if jumpState = 2{
 }
 
 if moveState = 0{ //Stop walking
-	if hspeed <= -0.1 || hspeed >= 0.1{
+	if hspeed <= -0.175 || hspeed >= 0.175{
 		hspeed /= 1.15;
 		image_speed = hspeed/4;
 	} else {
@@ -205,6 +242,16 @@ if moveState = 2{ //Walk Left
 		}
 	}
 }
+if moveState = 3{ //Skid left
+	image_xscale = -1;
+	hspeed -= hspdAcel;
+	
+	if hspeed <= 0{
+		moveState = 2;
+		time = 0;
+		hspeed = -walkHspd;
+	}
+}
 
 if runState = 1{ //If running
 	maxHspd = runHspd;
@@ -215,11 +262,28 @@ if runState = 1{ //If running
 if moveLength = 0{
 	tempX = x;
 }
-if moveLength > 0{
-	if x >= tempX + moveLength - hspeed{
+if moveLength != 0{
+	if x >= tempX + moveLength - hspeed && hspeed > 0{
 		x =	tempX + moveLength;
 		moveLength = 0;
-		moveState = 0;
 		time = 22+runState;
+		
+		if skidState = 0{
+			moveState = 0;
+		} else {
+			moveState = 3;
+			tempX = x;
+		}
+	}
+	if x <= tempX + moveLength - hspeed && hspeed < 0{
+		x =	tempX + moveLength;
+		moveLength = 0;
+		time = 22+runState;
+		
+		if skidState = 0{
+			moveState = 0;
+		} else {
+			moveState = 4;
+		}
 	}
 }

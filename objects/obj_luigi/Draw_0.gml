@@ -3,4 +3,4 @@ draw_set_color(c_white);
 draw_text(x,y,x);
 draw_text(x,y-20,state);
 
-draw_text(x,y-90,qteVal);
+draw_text(x,y-90,moveLength);
