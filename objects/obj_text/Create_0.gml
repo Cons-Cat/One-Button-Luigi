@@ -6,4 +6,4 @@ characters = 0;
 increase = 2;
 message_current = 0;
 message[0] = "";
-font = font_add_sprite_ext(spr_font,"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.!-*",true,0);
+font = font_add_sprite_ext(spr_font,"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.!?-*'",true,0);

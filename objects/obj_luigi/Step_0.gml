@@ -156,13 +156,137 @@ if time > 0{
 	if state = 20{
 		with instance_create_layer(x,y,layer,obj_narrationtext){
 			message[0] = "Some victims could not be restored.";
-			message[1] = "Luigi celebrates his friend, Toad.";
-			message[2] = "An engraving catches Luigi's eye."
-			message_end = 2;
+			message[1] = "An engraving catches Luigis eye."
+			message_end = 1;
 			message_length = string_length(message[0]);
 		}
 		state = 21;
 		time = -1;
+		exit;
+	}
+	if state = 21{
+		time = 10;
+		state = 22;
+		exit;
+	}
+	if state = 22{
+		moveState = 1;
+		moveLength = (x+8-x);
+		time = -1;
+		state = 23;
+		exit;
+	}
+	if state = 23{
+		image_xscale = -1;
+		state = 24;
+		time = 15;
+		exit;
+	}
+	if state = 24{
+		if !instance_exists(obj_qte){
+			instance_create_layer(x,y,layer,obj_qte);
+		}
+		
+		if global.pressed = 1{
+			state = 25;
+		}
+		if global.pressed = 2{
+			state = 27;
+		}
+		exit;
+	}
+	if state = 25{
+		time = 7;
+		state = 25.5;
+		exit;
+	}
+	if state = 25.5{
+		sprite_index = spr_p2_duck;
+		time = 26;
+		state = 26;
+		exit;
+	}
+	if state = 26{
+		with instance_create_layer(x,y,layer,obj_narrationtext){
+			message[0] = "'Here remains Toad'";
+			message_end = 0;
+			message_length = string_length(message[0]);
+		}
+		state = 26.2;
+		time = -1;
+		exit;
+	}
+	if state = 26.2{
+		time = 12;
+		state = 26.5;
+		exit;
+	}
+	if state = 26.5{
+		sprite_index = spr_p2_still;
+		time = 30;
+		state = 27;
+		exit;
+	}
+	if state = 27{
+		time = 70;
+		state = 28;
+		exit;
+	}
+	if state = 28{
+		with instance_create_layer(x,y,layer,obj_narrationtext){
+			message[0] = "Luigi moves on.";
+			message_end = 0;
+			message_length = string_length(message[0]);
+		}
+		state = 29;
+		time = -1;
+		exit;
+	}
+	if state = 29{
+		time = 25;
+		state = 30;
+		exit;
+	}
+	if state = 30{
+		moveState = 1;
+		state = 31;
+		time = -1;
+		exit;
+	}
+	if state = 31{
+	}
+	if state = 32{
+		sprite_index = spr_p2_still;
+		time = 5;
+		state = 33;
+		exit;
+	}
+	if state = 33{
+		time = 4;
+		state = 34;
+		exit;
+	}
+	if state = 34{
+		image_xscale = -1;
+		state = 35;
+		exit;
+	}
+	if state = 35{
+		with instance_create_layer(obj_toad.x,y,layer,obj_dialoguetext){
+			message[0] = "Ha! You just got hit by my baseball!";
+			message[1] = "What are you gonna do about it, dude?";
+			message_end = 1;
+			message_length = string_length(message[0]);
+			width = 14;
+			height = 3;
+		}
+		time = -1;
+		state = 36;
+		exit;
+	}
+	if state = 36{
+		instance_create_layer(x-120,y-8,layer,obj_goomba_1);
+		state = 37;
 		exit;
 	}
 }
@@ -204,6 +328,7 @@ if moveState = 0{ //Stop walking
 		hspeed /= 1.15;
 		image_speed = hspeed/4;
 	} else {
+		x = round(x);
 		hspeed = 0;
 		image_speed = 0;
 		

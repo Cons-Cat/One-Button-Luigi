@@ -1,7 +1,8 @@
 if global.pressed = 0{
 	if keyboard_check_pressed(vk_space){
 		global.pressed = 1;
-		sprite_index = spr_qte_pressed;
+		image_speed = 0;
+		image_index = 1;
 		alarm[0] = 6;
 	}
 	if timer = 0{
@@ -11,4 +12,10 @@ if global.pressed = 0{
 }
 
 x = obj_player.x;
-y = obj_player.y-32;
+if instance_exists(obj_luigi){
+	y = obj_player.y-47;
+} else {
+	y = obj_player.y-32;
+}
+
+visible = true;

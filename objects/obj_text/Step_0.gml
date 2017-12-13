@@ -18,6 +18,7 @@ if characters<message_length{
 	    } else {
 			if instance_exists(obj_luigi){
 				obj_luigi.time = 0;
+				obj_toad.time = 0;
 			}
 			instance_destroy();
 		}
